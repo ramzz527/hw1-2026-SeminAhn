@@ -3,6 +3,7 @@
 #
 #   make run     예제 실행 (C, Python)
 #   make test    유닛 테스트 (C, Python)
+#   make report  정렬 성능 비교 보고서 생성
 #   make debug   디버그 심볼을 넣어 빌드 (VS Code의 F5가 쓴다)
 #   make clean   빌드 산출물 정리
 #
@@ -14,7 +15,7 @@ CFLAGS ?= -std=c17 -Wall -Wextra -O2
 # `-I`는 아래 패턴 규칙이 대상 파일의 폴더로 붙인다. 여기서 고정하지 않는다.
 DEBUGFLAGS ?= -std=c17 -Wall -Wextra -g -O0
 
-.PHONY: all run run-c run-py test test-c test-py debug clean
+.PHONY: all run run-c run-py test test-c test-py report debug clean
 
 all: test
 
@@ -33,6 +34,9 @@ test-c: tests/test_sort.out
 
 test-py:
 	@python3 -m unittest discover -s tests -v
+
+report:
+	@python3 src/benchmark.py
 
 debug: src/main.debug.out
 

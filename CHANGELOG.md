@@ -4,6 +4,13 @@
 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르고,
 버전은 [유의적 버전](https://semver.org/lang/ko/)을 따른다.
 
+## [Unreleased]
+
+### Added
+
+- 삽입·퀵·병합 정렬을 C와 Python에 추가하고 공통 인터페이스로 제공한다.
+- `make report`로 세 정렬의 속도·메모리·안정성 비교 보고서를 생성한다.
+
 ## [1.0.3] - 2026-08-25
 
 ### Added

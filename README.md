@@ -90,9 +90,9 @@ ok    중복이 있는 배열
 ok    원소 하나
 ok    빈 배열
 
-6 checks, 0 failures
+24 checks, 0 failures
 ...
-Ran 7 tests in 0.001s
+Ran 8 tests in 0.001s
 
 OK
 ```
@@ -106,6 +106,7 @@ OK
 | `make test` | 유닛 테스트 (C · Python) |
 | `make run-c` · `make run-py` | 한쪽만 실행 |
 | `make test-c` · `make test-py` | 한쪽만 테스트 |
+| `make report` | 정렬 성능 비교 후 `report.md` 생성 |
 | `make debug` | 디버그 심볼을 넣어 빌드 |
 | `make clean` | 빌드 산출물 정리 |
 
@@ -168,12 +169,14 @@ algorithm-env/
 ├── compose.yml                      # 실습 컨테이너 (서비스 이름: lab)
 ├── Dockerfile                       # gcc · gdb · make · python3 · git
 ├── .vscode/                         # 빌드·디버그 설정 (F5, Cmd+Shift+B)
-├── Makefile                         # run · test · debug · clean
+├── Makefile                         # run · test · report · debug · clean
 ├── src/
-│   ├── sort.h · sort.c              # C 구현
+│   ├── sort.h · sort.c              # C 정렬 구현
 │   ├── main.c                       # C 실행 예제
-│   ├── sort.py                      # Python 구현
+│   ├── sort.py                      # Python 정렬 구현·공통 인터페이스
+│   ├── benchmark.py                 # 성능 측정 및 보고서 생성
 │   └── main.py                      # Python 실행 예제
+├── report.md                        # 정렬 성능 비교 결과
 └── tests/
     ├── test_sort.c                  # C 유닛 테스트 (표준 C만 사용)
     └── test_sort.py                 # Python 유닛 테스트 (unittest)
