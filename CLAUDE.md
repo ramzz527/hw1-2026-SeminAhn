@@ -9,7 +9,7 @@
   만들어 과제·개인프로젝트를 시작한다.
 - **강의 예제 코드는 여기 넣지 않는다.** 주제별 예제는 `algorithm-code`에
   있고, 그쪽은 매주 자란다. 교안·슬라이드는 `lecture` 저장소다.
-- `src`의 삽입·퀵·병합 정렬은 `report.md`의 성능 비교 구현이다. 강의 예제는
+- `src`의 삽입·퀵·트리 정렬은 `report.md`의 성능 비교 구현이다. 강의 예제는
   여기에 추가하지 않는다.
 - **설명을 길게 쓰지 않는다.** README는 "어떻게 돌리는가"까지만 담고,
   "왜 이렇게 되는가"는 강의 자료가 맡는다.
@@ -17,7 +17,7 @@
 ## 구조와 규약
 
 ```plaintext
-src/    sort.h · insertionSort.c · quickSort.c · mergesort.c · main.c
+src/    sort.h · insertionSort.c · quickSort.c · treeSort.c · main.c
 tools/  benchmark.c
 tests/  test_sort.c
 ```

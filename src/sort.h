@@ -16,6 +16,6 @@ typedef void (*SortFunction)(int a[], int n, SortStats *stats);
 /* a[0..n-1]을 제자리에서 오름차순으로 정렬한다. stats는 NULL일 수 있다. */
 void insertionSort(int a[], int n, SortStats *stats);
 void quickSort(int a[], int n, SortStats *stats);
-void mergeSort(int a[], int n, SortStats *stats);
+void treeSort(int a[], int n, SortStats *stats);
 
 #endif /* SORT_H */

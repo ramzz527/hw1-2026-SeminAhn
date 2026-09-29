@@ -16,7 +16,7 @@ typedef struct {
 static const SortEntry sorts[] = {
     {"insertion", insertionSort},
     {"quick", quickSort},
-    {"merge", mergeSort},
+    {"tree", treeSort},
 };
 
 static void printArray(const char *label, const int a[], int n) {

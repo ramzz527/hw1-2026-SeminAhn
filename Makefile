@@ -45,14 +45,14 @@ debug: src/main.debug.out
 %.debug.out: %.c
 	$(CC) $(DEBUGFLAGS) -I$(@D) -o $@ $(wildcard $(@D)/*.c)
 
-tests/test_sort.out: tests/test_sort.c src/insertionSort.c src/quickSort.c src/mergesort.c src/sort.h
-	$(CC) $(CFLAGS) -Isrc -o $@ tests/test_sort.c src/insertionSort.c src/quickSort.c src/mergesort.c
+tests/test_sort.out: tests/test_sort.c src/insertionSort.c src/quickSort.c src/treeSort.c src/sort.h
+	$(CC) $(CFLAGS) -Isrc -o $@ tests/test_sort.c src/insertionSort.c src/quickSort.c src/treeSort.c
 
-tools/benchmark.out: tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c src/sort.h
-	$(CC) $(CFLAGS) -Isrc -o $@ tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c
+tools/benchmark.out: tools/benchmark.c src/insertionSort.c src/quickSort.c src/treeSort.c src/sort.h
+	$(CC) $(CFLAGS) -Isrc -o $@ tools/benchmark.c src/insertionSort.c src/quickSort.c src/treeSort.c
 
-tools/benchmark.debug.out: tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c src/sort.h
-	$(CC) $(DEBUGFLAGS) -Isrc -o $@ tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c
+tools/benchmark.debug.out: tools/benchmark.c src/insertionSort.c src/quickSort.c src/treeSort.c src/sort.h
+	$(CC) $(DEBUGFLAGS) -Isrc -o $@ tools/benchmark.c src/insertionSort.c src/quickSort.c src/treeSort.c
 
 clean:
 	rm -f src/*.out tests/*.out
