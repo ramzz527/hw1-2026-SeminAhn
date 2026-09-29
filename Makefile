@@ -1,8 +1,8 @@
 # 빌드와 테스트를 한 단어로 돌리기 위한 Makefile.
 # 컨테이너 안에서 실행한다 (docker compose exec lab bash).
 #
-#   make run     예제 실행 (C, Python)
-#   make test    유닛 테스트 (C, Python)
+#   make run     C 예제 실행
+#   make test    C 유닛 테스트
 #   make report  정렬 성능 비교 보고서 생성
 #   make debug   디버그 심볼을 넣어 빌드 (VS Code의 F5가 쓴다)
 #   make clean   빌드 산출물 정리
@@ -15,28 +15,22 @@ CFLAGS ?= -std=c17 -Wall -Wextra -O2
 # `-I`는 아래 패턴 규칙이 대상 파일의 폴더로 붙인다. 여기서 고정하지 않는다.
 DEBUGFLAGS ?= -std=c17 -Wall -Wextra -g -O0
 
-.PHONY: all run run-c run-py test test-c test-py report debug clean
+.PHONY: all run run-c test test-c report debug clean
 
 all: test
 
-run: run-c run-py
+run: run-c
 
 run-c: src/main.out
 	@./src/main.out
 
-run-py:
-	@python3 src/main.py
-
-test: test-c test-py
+test: test-c
 
 test-c: tests/test_sort.out
 	@./tests/test_sort.out
 
-test-py:
-	@python3 -m unittest discover -s tests -v
-
-report:
-	@python3 src/benchmark.py
+report: tools/benchmark.out
+	@./tools/benchmark.out
 
 debug: src/main.debug.out
 
@@ -54,6 +48,12 @@ debug: src/main.debug.out
 tests/test_sort.out: tests/test_sort.c src/insertionSort.c src/quickSort.c src/mergesort.c src/sort.h
 	$(CC) $(CFLAGS) -Isrc -o $@ tests/test_sort.c src/insertionSort.c src/quickSort.c src/mergesort.c
 
+tools/benchmark.out: tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c src/sort.h
+	$(CC) $(CFLAGS) -Isrc -o $@ tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c
+
+tools/benchmark.debug.out: tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c src/sort.h
+	$(CC) $(DEBUGFLAGS) -Isrc -o $@ tools/benchmark.c src/insertionSort.c src/quickSort.c src/mergesort.c
+
 clean:
 	rm -f src/*.out tests/*.out
-	rm -rf src/__pycache__ tests/__pycache__
+	rm -f tools/*.out

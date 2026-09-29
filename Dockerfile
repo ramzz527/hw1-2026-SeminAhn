@@ -7,11 +7,10 @@ FROM debian:trixie-slim
 
 # build-essential: gcc · make와 표준 라이브러리 헤더
 # gdb: 포인터가 어디를 가리키는지 직접 들여다볼 때
-# python3: 같은 알고리즘의 두 번째 구현
 # git, less: Codespaces 터미널에서 저장소를 다루려면 컨테이너 안에도 있어야 한다
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       build-essential gdb python3 git less ca-certificates \
+    build-essential gdb git less ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /work

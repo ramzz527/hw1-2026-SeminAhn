@@ -18,17 +18,15 @@
 
 ```plaintext
 src/    sort.h · insertionSort.c · quickSort.c · mergesort.c · main.c
-  sort.py · main.py · benchmark.py
-tests/  test_sort.c · test_sort.py
+tools/  benchmark.c
+tests/  test_sort.c
 ```
 
-- **외부 라이브러리를 쓰지 않는다.** C는 표준 라이브러리만, Python은 표준
-  모듈만. C 테스트도 프레임워크 없이 직접 쓴다. 이미지에 무언가를 더 깔아야
-  하는 코드는 넣지 않는다.
+- **외부 라이브러리를 쓰지 않는다.** C 표준 라이브러리만 사용한다. 테스트도
+  프레임워크 없이 직접 쓴다. 이미지에 무언가를 더 깔아야 하는 코드는 넣지 않는다.
 - **실행 파일은 `*.out`으로 만든다.** `.gitignore`가 그것만 걸러낸다.
   확장자 없는 이름으로 컴파일하면 Linux 바이너리가 커밋에 섞인다.
-- C와 Python은 같은 알고리즘을 같은 이름의 함수로 구현한다. 파일명은 각
-  언어의 관례를 따른다(C는 camelCase, Python은 snake_case).
+- C 함수와 파일명은 camelCase 관례를 따른다.
 - **실행 수단은 셋이고 전부 `Makefile`을 거친다.** Code Runner의 ▶ 버튼(파일
   하나), `Cmd/Ctrl + Shift + B`(전체), `F5`(디버그). 확장이 만드는 기본 명령은
   파일 하나만 컴파일해 링크가 실패하므로 쓰지 않는다.
@@ -41,7 +39,7 @@ tests/  test_sort.c · test_sort.py
 ## 실행 환경
 
 수강생이 설치하는 것은 없다. Codespaces가 주 경로이고, 로컬은 Git과 Docker만
-있으면 된다. 컴파일러와 Python은 이미지 안에 있다.
+있으면 된다. 컴파일러는 이미지 안에 있다.
 
 ```sh
 docker compose up -d
@@ -61,6 +59,6 @@ make test
 - 새 작업은 `develop`에서 `feature/*` 브랜치를 만들어 시작한다.
   `main`에는 직접 커밋하지 않는다.
 - 한 커밋에는 한 가지 주제만 담는다.
-- **커밋 전에 `make test`가 통과해야 한다.** C와 Python 두 구현이 같은
-  결과를 내야 한다.
+- **커밋 전에 `make test`가 통과해야 한다.** 세 C 정렬 구현이 예상한 결과를
+  내야 한다.
 - 커밋 메시지 제목은 영어 명령형 한 줄

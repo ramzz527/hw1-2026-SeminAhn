@@ -69,8 +69,7 @@ int main(void) {
     makeInput(source, ARRAY_SIZE);
 
         printf("C (n=%d, median of %d runs)\n", ARRAY_SIZE, REPEATS);
-        printf("%-9s %7s %10s %10s %8s %5s %6s %6s\n",
-            "algorithm", "ms", "cmp", "moves", "aux(B)", "depth", "sorted", "stable");
+        printf("알고리즘   시간(ms)   비교   이동   메모리 재귀깊이 정렬 안정성\n");
 
     for (size_t index = 0; index < sizeof(sorts) / sizeof(sorts[0]); index++) {
         const SortEntry *entry = &sorts[index];

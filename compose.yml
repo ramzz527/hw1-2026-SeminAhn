@@ -4,8 +4,7 @@
 #   docker compose exec lab bash      # 컨테이너 셸로 들어가기
 #   docker compose down               # 중지·정리
 #
-# 컨테이너를 여러 개로 나누지 않는다. C와 Python이 같은 이미지 안에 있어야
-# 두 구현을 나란히 돌려 비교할 수 있다.
+# 컨테이너를 여러 개로 나누지 않는다. 빌드와 테스트를 같은 이미지에서 한다.
 services:
   lab:
     build: .

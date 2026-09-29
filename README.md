@@ -1,7 +1,7 @@
 # algorithm-env
 
 2026-2 **고급알고리즘**(SIT2001-01)의 **실습 환경 template**입니다.
-컴파일러와 Python이 들어 있는 컨테이너, `src`/`tests` 뼈대, 그리고 그것이
+컴파일러가 들어 있는 컨테이너, `src`/`tests` 뼈대, 그리고 그것이
 실제로 도는지 보여 주는 정렬 예제 하나가 들어 있습니다.
 
 - 강의 자료: [lec-algorithm.github.io/lecture](https://lec-algorithm.github.io/lecture/)
@@ -24,7 +24,7 @@
 ## 준비물
 
 **GitHub 계정 하나면 됩니다.** 로컬에서 돌리려면 Git과 Docker가 필요합니다.
-컴파일러와 Python은 컨테이너 이미지 안에 들어 있어 따로 설치하지 않습니다.
+컴파일러는 컨테이너 이미지 안에 들어 있어 따로 설치하지 않습니다.
 
 ## 시작하기 (권장): Codespaces
 
@@ -63,10 +63,9 @@ VS Code를 쓴다면 Dev Containers 확장의 **Reopen in Container**를 골라�
 make run
 ```
 
-각 언어에서 삽입·퀵·병합 정렬의 실행 시간 중앙값, 원소 비교·이동 횟수,
-보조 메모리, 최대 재귀 깊이, 정렬 여부와 안정성 여부를 출력합니다. C 메모리는
-입력과 호출 스택을 제외한 알고리즘 보조 공간이고, Python 메모리는
-`tracemalloc`의 추가 힙 peak입니다. 반복형 Python 구현의 재귀 깊이는 0입니다.
+삽입·퀵·병합 정렬의 실행 시간 중앙값, 원소 비교·이동 횟수, 보조 메모리,
+최대 재귀 깊이, 정렬 여부와 안정성 여부를 C에서 출력합니다. 보조 공간은
+입력과 호출 스택을 제외한 알고리즘 보조 공간입니다.
 
 ## 테스트
 
@@ -86,11 +85,7 @@ ok    중복이 있는 배열
 ok    원소 하나
 ok    빈 배열
 
-24 checks, 0 failures
-...
-Ran 8 tests in 0.001s
-
-OK
+21 checks, 0 failures
 ```
 
 테스트가 하나라도 실패하면 `make`가 0이 아닌 코드로 끝납니다. 과제를 내기
@@ -98,10 +93,10 @@ OK
 
 | 명령 | 하는 일 |
 | --- | --- |
-| `make run` | 예제 실행 (C · Python) |
-| `make test` | 유닛 테스트 (C · Python) |
-| `make run-c` · `make run-py` | 한쪽만 실행 |
-| `make test-c` · `make test-py` | 한쪽만 테스트 |
+| `make run` | C 예제 실행 |
+| `make test` | C 유닛 테스트 |
+| `make run-c` | C 예제 실행 |
+| `make test-c` | C 유닛 테스트 |
 | `make report` | 정렬 성능 비교 후 `report.md` 생성 |
 | `make debug` | 디버그 심볼을 넣어 빌드 |
 | `make clean` | 빌드 산출물 정리 |
@@ -116,7 +111,6 @@ Codespaces나 Dev Containers로 열었다면 편집기에서 바로 됩니다.
 | 전체 실행 | `Cmd/Ctrl + Shift + B` (기본 빌드 작업이 `make run`) |
 | 테스트 | 명령 팔레트 → **Tasks: Run Test Task** |
 | C 디버그 | `F5` → **C 디버그 (현재 파일)** |
-| Python 디버그 | `F5` → **Python 디버그 (현재 파일)** |
 
 `F5`를 누르면 빌드가 먼저 돌아 심볼이 있는 바이너리를 만들고 디버거가
 붙습니다. 중단점을 걸고 변수를 들여다볼 수 있습니다.
@@ -137,8 +131,8 @@ make src/main.debug.out && ./src/main.debug.out
 
 ### ▶ 버튼에 대해
 
-편집기 오른쪽 위의 ▶ 버튼은 **Code Runner** 확장이 제공합니다. C든 Python이든
-열려 있는 파일을 그대로 실행합니다.
+편집기 오른쪽 위의 ▶ 버튼은 **Code Runner** 확장이 제공합니다. 열려 있는 C
+파일을 실행합니다.
 
 두 확장이 각각 ▶ 버튼을 내놓으면 헷갈리므로, C/C++ 확장 쪽은 꺼 두었습니다
 (`C_Cpp.debugShortcut`). 그쪽 버튼은 **파일 하나만** 컴파일해서 이런 오류를
@@ -149,13 +143,11 @@ undefined reference to `insertionSort'
 collect2: error: ld returned 1 exit status
 ```
 
-Code Runner도 기본 설정 그대로면 같은 문제가 나고, Python은 이미지에 없는
-`python`을 찾습니다. 그래서 `.vscode/settings.json`에서 두 가지를 고쳐
-두었습니다.
+Code Runner도 기본 설정 그대로면 같은 문제가 납니다. 그래서
+`.vscode/settings.json`에서 다음을 고쳐 두었습니다.
 
 - C는 `Makefile`의 `%.out` 규칙을 거쳐 **같은 폴더의 `.c`를 함께** 빌드합니다
-- Python은 `python3`로 실행합니다
-- 출력 패널이 아니라 **터미널**에서 돌립니다. 그래야 `scanf`나 `input()`이 멈추지 않습니다
+- 출력 패널이 아니라 **터미널**에서 돌립니다. 그래야 `scanf`가 멈추지 않습니다
 
 ## 저장소 구조
 
@@ -163,7 +155,7 @@ Code Runner도 기본 설정 그대로면 같은 문제가 나고, Python은 이
 algorithm-env/
 ├── .devcontainer/devcontainer.json  # Codespaces · Dev Containers 설정
 ├── compose.yml                      # 실습 컨테이너 (서비스 이름: lab)
-├── Dockerfile                       # gcc · gdb · make · python3 · git
+├── Dockerfile                       # gcc · gdb · make · git
 ├── .vscode/                         # 빌드·디버그 설정 (F5, Cmd+Shift+B)
 ├── Makefile                         # run · test · report · debug · clean
 ├── src/
@@ -172,25 +164,22 @@ algorithm-env/
 │   ├── quickSort.c                  # 퀵 정렬
 │   ├── mergesort.c                  # 병합 정렬
 │   ├── main.c                       # C 실행 예제
-│   ├── sort.py                      # Python 정렬 구현·공통 인터페이스
-│   ├── benchmark.py                 # 성능 측정 및 보고서 생성
-│   └── main.py                      # Python 실행 예제
+│   └── main.c                       # C 실행 예제
+├── tools/
+│   └── benchmark.c                  # 성능 측정 및 보고서 생성
 ├── report.md                        # 정렬 성능 비교 결과
 └── tests/
     ├── test_sort.c                  # C 유닛 테스트 (표준 C만 사용)
-    └── test_sort.py                 # Python 유닛 테스트 (unittest)
+    └── test_sort.c                  # C 유닛 테스트 (표준 C만 사용)
 ```
 
 ## 규약
 
 - **실행 파일은 `*.out`으로 만듭니다.** `.gitignore`가 `*.out`만 걸러내므로,
   컨테이너에서 컴파일한 Linux 바이너리가 커밋에 섞이지 않습니다.
-- **외부 라이브러리를 쓰지 않습니다.** C는 표준 라이브러리만, Python은 표준
-  모듈만 씁니다. C 테스트도 프레임워크 없이 `assert` 수준으로 직접 씁니다.
-- **C와 Python은 같은 알고리즘을 같은 이름의 함수로 구현합니다.** 언어 차이가
-  알고리즘 차이로 보이지 않게 합니다.
-- 파일명은 각 언어의 관례를 따릅니다. C는 camelCase(`insertionSort`), Python은
-  snake_case(`insertion_sort`)입니다.
+- **외부 라이브러리를 쓰지 않습니다.** C 표준 라이브러리만 사용하고,
+  테스트도 프레임워크 없이 직접 씁니다.
+- 파일명과 함수명은 C 관례(camelCase, 예: `insertionSort`)를 따릅니다.
 
 ## 자기 코드로 바꾸기
 
