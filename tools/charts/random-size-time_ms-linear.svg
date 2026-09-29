@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560" role="img" aria-label="무작위 입력 크기별 실행 시간 (linear 축)">
+<style>text{font-family:"DejaVu Sans",sans-serif;fill:#202b33}.grid{stroke:#dce3e6;stroke-width:1}.axis{stroke:#53636c;stroke-width:1.2}.value{font-size:11px}.tick{font-size:12px}.category{font-size:14px}.legend{font-size:13px}.title{font-size:21px;font-weight:700}.ylabel{font-size:13px}</style>
+<text class="title" x="550.0" y="36" text-anchor="middle">무작위 입력 크기별 실행 시간 (linear 축)</text>
+<line class="grid" x1="95" y1="440.0" x2="1068" y2="440.0"/>
+<text class="tick" x="83" y="444.0" text-anchor="end">0.000</text>
+<line class="grid" x1="95" y1="369.2" x2="1068" y2="369.2"/>
+<text class="tick" x="83" y="373.2" text-anchor="end">5.000</text>
+<line class="grid" x1="95" y1="298.4" x2="1068" y2="298.4"/>
+<text class="tick" x="83" y="302.4" text-anchor="end">10.000</text>
+<line class="grid" x1="95" y1="227.6" x2="1068" y2="227.6"/>
+<text class="tick" x="83" y="231.6" text-anchor="end">15.000</text>
+<line class="grid" x1="95" y1="156.8" x2="1068" y2="156.8"/>
+<text class="tick" x="83" y="160.8" text-anchor="end">20.000</text>
+<line class="grid" x1="95" y1="86.0" x2="1068" y2="86.0"/>
+<text class="tick" x="83" y="90.0" text-anchor="end">25.000</text>
+<line class="axis" x1="95" y1="86" x2="95" y2="440"/>
+<line class="axis" x1="95" y1="440" x2="1068" y2="440"/>
+<text class="ylabel" x="22" y="263.0" transform="rotate(-90 22 263.0)" text-anchor="middle">시간 (ms)</text>
+<rect x="139.9" y="437.2" width="46.2" height="2.8" fill="#0072B2" rx="1"/>
+<text class="value" x="163.0" y="431.2" text-anchor="middle">0.197</text>
+<rect x="193.5" y="439.3" width="46.2" height="0.7" fill="#D55E00" rx="1"/>
+<text class="value" x="216.6" y="433.3" text-anchor="middle">0.048</text>
+<rect x="247.1" y="438.4" width="46.2" height="1.6" fill="#009E73" rx="1"/>
+<text class="value" x="270.2" y="432.4" text-anchor="middle">0.110</text>
+<text class="category" x="216.6" y="465" text-anchor="middle">1000</text>
+<rect x="383.2" y="429.0" width="46.2" height="11.0" fill="#0072B2" rx="1"/>
+<text class="value" x="406.3" y="423.0" text-anchor="middle">0.778</text>
+<rect x="436.8" y="438.4" width="46.2" height="1.6" fill="#D55E00" rx="1"/>
+<text class="value" x="459.9" y="432.4" text-anchor="middle">0.115</text>
+<rect x="490.4" y="436.7" width="46.2" height="3.3" fill="#009E73" rx="1"/>
+<text class="value" x="513.5" y="430.7" text-anchor="middle">0.235</text>
+<text class="category" x="459.9" y="465" text-anchor="middle">2000</text>
+<rect x="626.4" y="395.6" width="46.2" height="44.4" fill="#0072B2" rx="1"/>
+<text class="value" x="649.5" y="389.6" text-anchor="middle">3.135</text>
+<rect x="680.0" y="436.5" width="46.2" height="3.5" fill="#D55E00" rx="1"/>
+<text class="value" x="703.1" y="430.5" text-anchor="middle">0.246</text>
+<rect x="733.6" y="433.6" width="46.2" height="6.4" fill="#009E73" rx="1"/>
+<text class="value" x="756.7" y="427.6" text-anchor="middle">0.450</text>
+<text class="category" x="703.1" y="465" text-anchor="middle">4000</text>
+<rect x="869.7" y="284.6" width="46.2" height="155.4" fill="#0072B2" rx="1"/>
+<text class="value" x="892.8" y="278.6" text-anchor="middle">10.977</text>
+<rect x="923.3" y="431.6" width="46.2" height="8.4" fill="#D55E00" rx="1"/>
+<text class="value" x="946.4" y="425.6" text-anchor="middle">0.591</text>
+<rect x="976.9" y="419.1" width="46.2" height="20.9" fill="#009E73" rx="1"/>
+<text class="value" x="1000.0" y="413.1" text-anchor="middle">1.478</text>
+<text class="category" x="946.4" y="465" text-anchor="middle">8000</text>
+<rect x="355.0" y="517" width="14" height="14" fill="#0072B2"/>
+<text class="legend" x="376.0" y="530">Insertion</text>
+<rect x="485.0" y="517" width="14" height="14" fill="#D55E00"/>
+<text class="legend" x="506.0" y="530">Quick</text>
+<rect x="615.0" y="517" width="14" height="14" fill="#009E73"/>
+<text class="legend" x="636.0" y="530">Tree</text>
+</svg>
