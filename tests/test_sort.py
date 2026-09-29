@@ -10,9 +10,9 @@ from pathlib import Path
 # src/를 import 경로에 넣는다. 패키지로 만들지 않아도 되도록.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from sort import SORTS, bubble_sort  # noqa: E402
+from sort import SORTS  # noqa: E402
 
-ALL_SORTS = [bubble_sort, *SORTS.values()]
+ALL_SORTS = list(SORTS.values())
 
 
 class TestSorts(unittest.TestCase):
@@ -58,6 +58,16 @@ class TestSorts(unittest.TestCase):
                 result = sort(values)
                 self.assertIs(result, values)
                 self.assertEqual(values, [1, 2, 3])
+
+    def test_metrics(self):
+        for sort in ALL_SORTS:
+            with self.subTest(sort=sort.__name__):
+                metrics = {"comparisons": 0, "moves": 0}
+                values = [3, 1, 2]
+                sort(values, metrics=metrics)
+                self.assertEqual(values, [1, 2, 3])
+                self.assertGreater(metrics["comparisons"], 0)
+                self.assertGreater(metrics["moves"], 0)
 
     def test_stability(self):
         records = [(2, "first"), (3, "middle"), (2, "second"), (1, "small")]

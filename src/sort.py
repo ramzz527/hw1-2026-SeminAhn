@@ -1,39 +1,34 @@
 """정렬 구현과 공통 Python 인터페이스."""
 
 
-def bubble_sort(a):
-    """a를 제자리에서 오름차순으로 정렬한다."""
-    n = len(a)
-    for i in range(n - 1):
-        swapped = False
-        # 한 번 훑을 때마다 가장 큰 값이 뒤로 밀려 자리를 잡는다.
-        for j in range(n - 1 - i):
-            if a[j] > a[j + 1]:
-                a[j], a[j + 1] = a[j + 1], a[j]
-                swapped = True
-        # 한 바퀴 동안 교환이 없었다면 이미 정렬된 것이다.
-        if not swapped:
-            return a
-    return a
-
-
-def insertion_sort(a, key=None):
+def insertion_sort(a, key=None, metrics=None):
     """a를 제자리에서 안정적으로 오름차순 정렬한다."""
     if key is None:
         key = lambda value: value
 
     for index in range(1, len(a)):
         value = a[index]
+        if metrics is not None:
+            metrics["moves"] += 1
         value_key = key(value)
         position = index - 1
-        while position >= 0 and key(a[position]) > value_key:
+
+        while position >= 0:
+            if metrics is not None:
+                metrics["comparisons"] += 1
+            if key(a[position]) <= value_key:
+                break
             a[position + 1] = a[position]
+            if metrics is not None:
+                metrics["moves"] += 1
             position -= 1
         a[position + 1] = value
+        if metrics is not None:
+            metrics["moves"] += 1
     return a
 
 
-def quick_sort(a, key=None):
+def quick_sort(a, key=None, metrics=None):
     """a를 제자리에서 불안정 퀵 정렬로 오름차순 정렬한다."""
     if key is None:
         key = lambda value: value
@@ -46,21 +41,32 @@ def quick_sort(a, key=None):
         low, high = pending.pop()
         while low < high:
             pivot_key = key(a[(low + high) // 2])
+            if metrics is not None:
+                metrics["moves"] += 1
             less = low
             scan = low
             greater = high
 
             while scan <= greater:
                 scan_key = key(a[scan])
+                if metrics is not None:
+                    metrics["comparisons"] += 1
                 if scan_key < pivot_key:
                     a[less], a[scan] = a[scan], a[less]
+                    if metrics is not None:
+                        metrics["moves"] += 3
                     less += 1
                     scan += 1
-                elif scan_key > pivot_key:
-                    a[scan], a[greater] = a[greater], a[scan]
-                    greater -= 1
                 else:
-                    scan += 1
+                    if metrics is not None:
+                        metrics["comparisons"] += 1
+                    if scan_key > pivot_key:
+                        a[scan], a[greater] = a[greater], a[scan]
+                        if metrics is not None:
+                            metrics["moves"] += 3
+                        greater -= 1
+                    else:
+                        scan += 1
 
             left_size = less - low
             right_size = high - greater
@@ -75,13 +81,13 @@ def quick_sort(a, key=None):
     return a
 
 
-def merge_sort(a, key=None):
+def merge_sort(a, key=None, metrics=None):
     """a를 안정 병합 정렬로 오름차순 정렬한다."""
     if key is None:
         key = lambda value: value
 
     length = len(a)
-    buffer = list(a)
+    buffer = [None] * length
     width = 1
     while width < length:
         for start in range(0, length, 2 * width):
@@ -92,24 +98,36 @@ def merge_sort(a, key=None):
             output = start
 
             while left < middle and right < end:
+                if metrics is not None:
+                    metrics["comparisons"] += 1
                 if key(a[left]) <= key(a[right]):
                     buffer[output] = a[left]
+                    if metrics is not None:
+                        metrics["moves"] += 1
                     left += 1
                 else:
                     buffer[output] = a[right]
+                    if metrics is not None:
+                        metrics["moves"] += 1
                     right += 1
                 output += 1
 
             while left < middle:
                 buffer[output] = a[left]
+                if metrics is not None:
+                    metrics["moves"] += 1
                 left += 1
                 output += 1
             while right < end:
                 buffer[output] = a[right]
+                if metrics is not None:
+                    metrics["moves"] += 1
                 right += 1
                 output += 1
 
         a[:] = buffer
+        if metrics is not None:
+            metrics["moves"] += length
         width *= 2
     return a
 

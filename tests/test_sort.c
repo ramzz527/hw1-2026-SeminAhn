@@ -14,7 +14,6 @@ typedef struct {
 } SortEntry;
 
 static const SortEntry sorts[] = {
-    {"bubble", bubbleSort},
     {"insertion", insertionSort},
     {"quick", quickSort},
     {"merge", mergeSort},
@@ -36,7 +35,7 @@ static void expectSorted(const char *caseName, const SortEntry *entry,
         memcpy(actual, input, (size_t)n * sizeof(int));
     }
     checks++;
-    entry->sort(actual, n);
+    entry->sort(actual, n, NULL);
     if (n > 0 && memcmp(actual, want, (size_t)n * sizeof(int)) != 0) {
         failures++;
         printf("FAIL  %s (%s)\n", caseName, entry->name);
@@ -54,7 +53,27 @@ static void expectAllSorted(const char *caseName, const int input[],
     }
 }
 
+static void expectMetrics(void) {
+    const int want[] = {1, 2, 3};
+
+    for (size_t index = 0; index < sizeof(sorts) / sizeof(sorts[0]); index++) {
+        int actual[] = {3, 1, 2};
+        SortStats stats = {0};
+        sorts[index].sort(actual, 3, &stats);
+        checks++;
+        if (memcmp(actual, want, sizeof(want)) != 0 ||
+            stats.comparisons == 0 || stats.moves == 0 ||
+            stats.auxiliary_bytes == 0) {
+            failures++;
+            printf("FAIL  metrics (%s)\n", sorts[index].name);
+        } else {
+            printf("ok    metrics (%s)\n", sorts[index].name);
+        }
+    }
+}
+
 int main(void) {
+    expectMetrics();
     {
         int a[] = {6, 8, 5, 9, 10, 1, 7, 2, 4, 3};
         const int want[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

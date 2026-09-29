@@ -9,15 +9,16 @@
   만들어 과제·개인프로젝트를 시작한다.
 - **강의 예제 코드는 여기 넣지 않는다.** 주제별 예제는 `algorithm-code`에
   있고, 그쪽은 매주 자란다. 교안·슬라이드는 `lecture` 저장소다.
-- `src`의 버블 정렬은 환경이 도는지 보여 주는 예제다. 알고리즘을 더 넣지
-  않는다. 예제가 늘어나면 template이 프로젝트 출발점으로 지저분해진다.
+- `src`의 삽입·퀵·병합 정렬은 `report.md`의 성능 비교 구현이다. 강의 예제는
+  여기에 추가하지 않는다.
 - **설명을 길게 쓰지 않는다.** README는 "어떻게 돌리는가"까지만 담고,
   "왜 이렇게 되는가"는 강의 자료가 맡는다.
 
 ## 구조와 규약
 
 ```plaintext
-src/    sort.h · sort.c · main.c · sort.py · main.py
+src/    sort.h · insertionSort.c · quickSort.c · mergesort.c · main.c
+  sort.py · main.py · benchmark.py
 tests/  test_sort.c · test_sort.py
 ```
 

@@ -63,14 +63,10 @@ VS Code를 쓴다면 Dev Containers 확장의 **Reopen in Container**를 골라�
 make run
 ```
 
-- 결과
-
-```console
-sorted: 1 2 3 4 5 6 7 8 9 10
-sorted: 1 2 3 4 5 6 7 8 9 10
-```
-
-C와 Python 두 구현이 같은 결과를 냅니다.
+각 언어에서 삽입·퀵·병합 정렬의 실행 시간 중앙값, 원소 비교·이동 횟수,
+보조 메모리, 최대 재귀 깊이, 정렬 여부와 안정성 여부를 출력합니다. C 메모리는
+입력과 호출 스택을 제외한 알고리즘 보조 공간이고, Python 메모리는
+`tracemalloc`의 추가 힙 peak입니다. 반복형 Python 구현의 재귀 깊이는 0입니다.
 
 ## 테스트
 
@@ -149,7 +145,7 @@ make src/main.debug.out && ./src/main.debug.out
 냅니다.
 
 ```console
-undefined reference to `bubbleSort'
+undefined reference to `insertionSort'
 collect2: error: ld returned 1 exit status
 ```
 
@@ -171,7 +167,10 @@ algorithm-env/
 ├── .vscode/                         # 빌드·디버그 설정 (F5, Cmd+Shift+B)
 ├── Makefile                         # run · test · report · debug · clean
 ├── src/
-│   ├── sort.h · sort.c              # C 정렬 구현
+│   ├── sort.h                      # C 공통 인터페이스
+│   ├── insertionSort.c              # 삽입 정렬
+│   ├── quickSort.c                  # 퀵 정렬
+│   ├── mergesort.c                  # 병합 정렬
 │   ├── main.c                       # C 실행 예제
 │   ├── sort.py                      # Python 정렬 구현·공통 인터페이스
 │   ├── benchmark.py                 # 성능 측정 및 보고서 생성
@@ -190,14 +189,14 @@ algorithm-env/
   모듈만 씁니다. C 테스트도 프레임워크 없이 `assert` 수준으로 직접 씁니다.
 - **C와 Python은 같은 알고리즘을 같은 이름의 함수로 구현합니다.** 언어 차이가
   알고리즘 차이로 보이지 않게 합니다.
-- 파일명은 각 언어의 관례를 따릅니다. C는 camelCase(`bubbleSort`), Python은
-  snake_case(`bubble_sort`)입니다.
+- 파일명은 각 언어의 관례를 따릅니다. C는 camelCase(`insertionSort`), Python은
+  snake_case(`insertion_sort`)입니다.
 
 ## 자기 코드로 바꾸기
 
-`src`의 버블 정렬은 환경이 도는지 보여 주는 예제일 뿐입니다. 지우고 자기
-코드를 넣으세요. `tests`도 마찬가지입니다. 뼈대(`Makefile`, `src`, `tests`,
-컨테이너 설정)만 남기면 됩니다.
+`src`의 정렬 구현은 `report.md`의 성능 비교에 사용합니다. 자기 코드로 바꿀 때는
+`tests`도 함께 수정하세요. 뼈대(`Makefile`, `src`, `tests`, 컨테이너 설정)는
+그대로 사용할 수 있습니다.
 
 ## 변경 기록
 
