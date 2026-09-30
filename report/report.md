@@ -38,62 +38,6 @@
 
 ### 1.3 파일 구성
 
-```mermaid
-flowchart TB
-    make["Makefile"]
-    subgraph reportdir["report/"]
-        report["report.md"]
-        results["results.csv"]
-        smallResults["small-array-results.csv"]
-        charts["tools/charts/*.svg"]
-    end
-    readme["README.md"]
-    changelog["CHANGELOG.md"]
-    gitignore[".gitignore"]
-    instructions["AGENTS.md · CLAUDE.md"]
-    subgraph environment["환경 설정"]
-        compose["compose.yml"]
-        dockerfile["Dockerfile"]
-        devcontainer[".devcontainer/devcontainer.json"]
-        vscode[".vscode/*.json"]
-    end
-    subgraph src["src/"]
-        header["sort.h\nC 공통 인터페이스"]
-        insertion["insertionSort.c"]
-        quick["quickSort.c"]
-        tree["treeSort.c"]
-        main["main.c"]
-    end
-    subgraph tools["tools/"]
-        benchmark["benchmark.c"]
-        svgchart["svgchart.py"]
-    end
-    subgraph tests["tests/"]
-        test["test_sort.c"]
-    end
-    insertion --> header
-    quick --> header
-    tree --> header
-    main --> header
-    test --> header
-    test --> insertion
-    test --> quick
-    test --> tree
-    benchmark --> header
-    benchmark --> insertion
-    benchmark --> quick
-    benchmark --> tree
-    benchmark --> report
-    main --> results
-    results --> svgchart
-    smallResults --> svgchart
-    svgchart --> charts
-    make --> main
-    make --> test
-    make --> benchmark
-    make --> svgchart
-```
-
 | 파일 | 기능 |
 | --- | --- |
 | `Makefile` | C 프로그램 빌드·실행·테스트·보고서 생성 |
@@ -162,6 +106,7 @@ a[j + 1] = value;
 `>` 조건은 같은 값은 지나치지 않으므로 입력 순서를 유지한다. 이로 인해 안정성을 유지할 수 있다.
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "12px"}, "flowchart": {"nodeSpacing": 20, "rankSpacing": 25}}}%%
 flowchart LR
     A["입력: 5, 2, 4, 1"] --> B["정렬 구간: 5"]
     B --> C["2를 앞에 삽입: 2, 5 | 4, 1"]
@@ -196,6 +141,7 @@ while (scan <= greater) {
 작은 값은 왼쪽으로, 큰 값은 오른쪽으로 보낸다. 큰 값과 바꿔 온 원소는 아직 확인하지 않았으므로 `scan`을 그대로 둔다.
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "12px"}, "flowchart": {"nodeSpacing": 20, "rankSpacing": 25}}}%%
 flowchart LR
     A["7, 2, 5, 2, 9, 1"] --> B["피벗 5로 분할"]
     B --> C["작은 값: 1, 2, 2"]
@@ -216,6 +162,7 @@ flowchart LR
 같은 값 `1, 2, 3, 4`를 오름차순으로 삽입하면 두 트리의 모양은 다음처럼 달라진다. 일반 BST는 오른쪽으로 길어지지만 AVL 트리는 회전으로 높이를 낮게 유지한다.
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "12px"}, "flowchart": {"nodeSpacing": 20, "rankSpacing": 25}}}%%
 flowchart LR
     subgraph ordinary["일반 BST · 오름차순 삽입"]
         direction TB
@@ -271,6 +218,7 @@ while (current != NULL || stack_size > 0) {
 노드 삽입 비용은 트리 높이를 `h`라 할 때 O(nh), 중위 순회는 O(n)이다. 균형 트리에서는 높이가 O(log n)이므로 평균적인 시간은 O(n log n)이지만, 이 구현은 균형을 강제하지 않는 일반 BST이므로 오름차순 또는 내림차순 입력에서는 높이가 O(n)이 되어 최악 시간은 O(n²)이다. 노드와 순회 스택을 저장하므로 추가 공간은 O(n)이다. 중복을 개수로 합치고 원래 순서는 저장하지 않으므로 안정 정렬은 아니다.
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "12px"}, "flowchart": {"nodeSpacing": 20, "rankSpacing": 25}}}%%
 flowchart LR
     A["입력: 7, 2, 5, 2, 1"] --> B["BST 삽입"]
     B --> C["중위 순회"]
@@ -471,6 +419,7 @@ Insertion sort는 무작위 입력 크기가 커지면서 비교 횟수와 시�
 Insertion–Tree는 두 끝 구간 모두 Insertion sort가, Quick–Tree는 두 끝 구간 모두 Quick sort가 더 빨라 교차 탐색을 시작하지 않는다. 그러므로 표의 “지속 교차 없음”은 양 끝 구간에서 승자가 같다는 뜻이며, 중간 크기에서 일시적으로 순위가 바뀌지 않았다는 보증은 아니다. 교차점은 이 입력과 환경에서 얻은 경험값이므로 다른 환경의 임계 크기로 일반화할 수 없다.
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "12px"}, "flowchart": {"nodeSpacing": 20, "rankSpacing": 25}}}%%
 flowchart TD
     A["n=1~128의 배열당 시간 측정"] --> B["각 n 주변 최대 5개 측정값의 중앙값"]
     B --> C["작은 쪽 승자: n=2~6"]
