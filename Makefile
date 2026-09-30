@@ -3,7 +3,7 @@
 #
 #   make run     C 예제 실행
 #   make test    C 유닛 테스트
-#   make report  정렬 성능 비교 보고서 생성
+#   make report  저장된 정렬 성능 비교 보고서 확인
 #   make debug   디버그 심볼을 넣어 빌드 (VS Code의 F5가 쓴다)
 #   make clean   빌드 산출물 정리
 #
@@ -30,8 +30,9 @@ test: test-c
 test-c: tests/test_sort.out
 	@./tests/test_sort.out
 
-report: tools/benchmark.out
-	@./tools/benchmark.out
+report:
+	@test -s report/report.md
+	@printf 'report/report.md is the project report; make report leaves it unchanged.\n'
 
 charts:
 	@python3 tools/svgchart.py report/results.csv --output-dir report/tools/charts
