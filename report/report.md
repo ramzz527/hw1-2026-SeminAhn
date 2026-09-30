@@ -41,8 +41,11 @@
 ```mermaid
 flowchart TB
     make["Makefile"]
-    report["report.md"]
-    results["results.csv"]
+    subgraph reportdir["report/"]
+        report["report.md"]
+        results["results.csv"]
+        charts["tools/charts/*.svg"]
+    end
     readme["README.md"]
     changelog["CHANGELOG.md"]
     gitignore[".gitignore"]
@@ -63,7 +66,6 @@ flowchart TB
     subgraph tools["tools/"]
         benchmark["benchmark.c"]
         svgchart["svgchart.py"]
-        charts["charts/*.svg"]
     end
     subgraph tests["tests/"]
         test["test_sort.c"]
@@ -98,16 +100,16 @@ flowchart TB
 | `README.md`, `CHANGELOG.md` | 사용 방법과 변경 내역 |
 | `AGENTS.md`, `CLAUDE.md` | 저장소 작업 지침 |
 | `.gitignore` | 빌드 산출물 제외 규칙 |
-| `report.md` | 정렬 알고리즘 설명과 C 실험 결과 |
-| `results.csv` | 실행별 벤치마크 측정 결과 |
+| `report/report.md` | 정렬 알고리즘 설명과 C 실험 결과 |
+| `report/results.csv` | 실행별 벤치마크 측정 결과 |
 | `src/sort.h` | C 정렬 함수와 통계 구조체의 공통 인터페이스 |
 | `src/insertionSort.c` | C 삽입 정렬 구현 |
 | `src/quickSort.c` | C 퀵 정렬 구현 |
 | `src/treeSort.c` | 이진 탐색 트리를 만들고 중위 순회로 정렬하는 tree sort |
 | `src/main.c` | 정렬 실행 예제와 통계 출력 |
-| `tools/benchmark.c` | C 정렬 성능 측정 및 `report.md` 생성 |
+| `tools/benchmark.c` | C 정렬 성능 측정 및 `report/report.md` 생성 |
 | `tools/svgchart.py` | CSV 측정 결과를 SVG 차트로 변환 |
-| `tools/charts/*.svg` | 생성된 성능 비교 차트 |
+| `report/tools/charts/*.svg` | 생성된 성능 비교 차트 |
 | `tests/test_sort.c` | 표준 C로 정렬 결과와 통계 검증 |
 
 ### 1.4 검증 방법
