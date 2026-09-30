@@ -44,6 +44,7 @@ flowchart TB
     subgraph reportdir["report/"]
         report["report.md"]
         results["results.csv"]
+        smallResults["small-array-results.csv"]
         charts["tools/charts/*.svg"]
     end
     readme["README.md"]
@@ -85,6 +86,7 @@ flowchart TB
     benchmark --> report
     main --> results
     results --> svgchart
+    smallResults --> svgchart
     svgchart --> charts
     make --> main
     make --> test
@@ -102,6 +104,7 @@ flowchart TB
 | `.gitignore` | 빌드 산출물 제외 규칙 |
 | `report/report.md` | 정렬 알고리즘 설명과 C 실험 결과 |
 | `report/results.csv` | 실행별 벤치마크 측정 결과 |
+| `report/small-array-results.csv` | 소형 배열 실행 시간 측정 결과 |
 | `src/sort.h` | C 정렬 함수와 통계 구조체의 공통 인터페이스 |
 | `src/insertionSort.c` | C 삽입 정렬 구현 |
 | `src/quickSort.c` | C 퀵 정렬 구현 |

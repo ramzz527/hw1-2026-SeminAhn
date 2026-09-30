@@ -24,14 +24,6 @@ METRICS = {
     "moves": ("이동 횟수", "이동 횟수"),
     "max_recursion_depth": ("최대 재귀 깊이", "재귀 깊이"),
 }
-SMALL_ARRAY_SIZES = (1, 2, 4, 8, 16, 32, 64, 128)
-SMALL_ARRAY_TIMES = {
-    "insertion": (0.0024, 0.0054, 0.0078, 0.0195, 0.0547, 0.2578, 0.5625, 2.4375),
-    "quick": (0.0022, 0.0088, 0.0205, 0.0371, 0.0820, 0.4609, 0.5156, 1.6875),
-    "tree": (0.0034, 0.0332, 0.0596, 0.1387, 0.3047, 1.2109, 1.5000, 3.2500),
-}
-
-
 def read_results(csv_path):
     with csv_path.open(newline="", encoding="utf-8") as source:
         rows = list(csv.DictReader(source))
@@ -41,6 +33,28 @@ def read_results(csv_path):
     if not rows or not required.issubset(rows[0]):
         raise ValueError(f"{csv_path} is missing benchmark columns or rows")
     return rows
+
+
+def read_small_array_results(csv_path):
+    with csv_path.open(newline="", encoding="utf-8") as source:
+        rows = list(csv.DictReader(source))
+    required = {"array_size", "algorithm", "time_us"}
+    if not rows or not required.issubset(rows[0]):
+        raise ValueError(f"{csv_path} is missing small-array columns or rows")
+
+    sizes = sorted({int(row["array_size"]) for row in rows})
+    series = {algorithm: [] for algorithm in ALGORITHMS}
+    for size in sizes:
+        size_rows = {
+            row["algorithm"]: float(row["time_us"])
+            for row in rows
+            if int(row["array_size"]) == size
+        }
+        if set(size_rows) != set(ALGORITHMS):
+            raise ValueError(f"{csv_path} must include all algorithms for n={size}")
+        for algorithm in ALGORITHMS:
+            series[algorithm].append(size_rows[algorithm])
+    return sizes, series
 
 
 def format_value(value, metric):
@@ -281,9 +295,12 @@ def generate(rows, output_dir):
             values, metric, output_dir / f"summary-{metric}.svg", False,
         )
 
+    small_array_sizes, small_array_times = read_small_array_results(
+        Path("report/small-array-results.csv")
+    )
     render_line_chart(
         "작은 배열 크기별 실행 시간", "시간 (µs)",
-        [str(size) for size in SMALL_ARRAY_SIZES], SMALL_ARRAY_TIMES,
+        [str(size) for size in small_array_sizes], small_array_times,
         output_dir / "small-array-time.svg",
     )
 

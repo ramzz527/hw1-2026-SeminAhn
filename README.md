@@ -69,8 +69,9 @@ make run
 `n=2000`에서 무작위·정렬·역순·중복 다수 입력을 각각 비교하고, 무작위 입력은
 `n=1000`, `2000`, `4000`, `8000` 크기별로도 비교 표를 출력합니다.
 같은 측정 결과를 `report/results.csv`에도 기록하며, 매 실행 때 새 결과로
-덮어씁니다. SVG 비교 그래프도 `report/tools/charts/`에 생성됩니다. 기존 CSV에서
-그래프만 다시 만들려면 `make charts`를 실행합니다. CSV에는 비교 유형
+덮어씁니다. SVG 비교 그래프도 `report/tools/charts/`에 생성됩니다. 기존 CSV와
+`report/small-array-results.csv`에서 그래프만 다시 만들려면 `make charts`를 실행합니다.
+CSV에는 비교 유형
 (`input_shape` 또는 `random_size`), 입력 모양,
 알고리즘명, 배열 크기, 반복 횟수, 시간, 비교·이동 횟수, 보조 공간, 재귀 깊이,
 정렬 여부, 안정성 여부가 들어갑니다.

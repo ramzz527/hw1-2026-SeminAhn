@@ -105,6 +105,41 @@ int main(void) {
         const int want[1] = {0};
         expectAllSorted("빈 배열", a, want, 0);
     }
+    {
+        int a[] = {2, 1};
+        const int want[] = {1, 2};
+        expectAllSorted("두 원소 역순", a, want, 2);
+    }
+    {
+        int a[] = {-3, 5, -1, 0, -2};
+        const int want[] = {-3, -2, -1, 0, 5};
+        expectAllSorted("음수가 있는 배열", a, want, 5);
+    }
+    {
+        int a[] = {7, 7, 7, 7};
+        const int want[] = {7, 7, 7, 7};
+        expectAllSorted("모든 원소가 같은 배열", a, want, 4);
+    }
+    {
+        int a[] = {4, 1, 4, 2, 4, 3, 4};
+        const int want[] = {1, 2, 3, 4, 4, 4, 4};
+        expectAllSorted("반복값이 섞인 배열", a, want, 7);
+    }
+    {
+        int a[] = {2147483647, 0, -2147483647, 1};
+        const int want[] = {-2147483647, 0, 1, 2147483647};
+        expectAllSorted("큰 정수 범위 배열", a, want, 4);
+    }
+    {
+        int a[] = {1, 2, 3, 5, 4, 6, 7};
+        const int want[] = {1, 2, 3, 4, 5, 6, 7};
+        expectAllSorted("거의 정렬된 배열", a, want, 7);
+    }
+    {
+        int a[] = {9, 1, 8, 2, 7, 3, 6, 4, 5};
+        const int want[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        expectAllSorted("양 끝값 교차 배열", a, want, 9);
+    }
 
     printf("\n%d checks, %d failures\n", checks, failures);
     return failures == 0 ? 0 : 1;
