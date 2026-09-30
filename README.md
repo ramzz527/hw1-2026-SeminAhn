@@ -2,7 +2,7 @@
 
 2026-2 **고급알고리즘**(SIT2001-01)의 **실습 환경 template**입니다.
 컴파일러가 들어 있는 컨테이너, `src`/`tests` 뼈대, 그리고 그것이
-실제로 도는지 보여 주는 정렬 예제 하나가 들어 있습니다.
+실제로 동작하는 삽입·퀵·트리 정렬 구현과 성능 비교 보고서가 들어 있습니다.
 
 - 강의 자료: [lec-algorithm.github.io/lecture](https://lec-algorithm.github.io/lecture/)
 - 강의 예제 코드: [lec-algorithm/algorithm-code](https://github.com/lec-algorithm/algorithm-code)
@@ -55,7 +55,7 @@ VS Code를 쓴다면 Dev Containers 확장의 **Reopen in Container**를 골라�
 
 ## 돌려보기
 
-컨테이너 안에서 `make` 한 단어면 됩니다.
+컨테이너 안에서 `make run`으로 실행합니다.
 
 - 실행
 
@@ -68,8 +68,10 @@ make run
 입력과 호출 스택을 제외한 알고리즘 보조 공간입니다.
 `n=2000`에서 무작위·정렬·역순·중복 다수 입력을 각각 비교하고, 무작위 입력은
 `n=1000`, `2000`, `4000`, `8000` 크기별로도 비교 표를 출력합니다.
-같은 측정 결과를 저장소 루트의 `results.csv`에도 기록하며, 매 실행 때 새 결과로
-덮어씁니다. CSV에는 비교 유형(`input_shape` 또는 `random_size`), 입력 모양,
+같은 측정 결과를 `report/results.csv`에도 기록하며, 매 실행 때 새 결과로
+덮어씁니다. SVG 비교 그래프도 `report/tools/charts/`에 생성됩니다. 기존 CSV에서
+그래프만 다시 만들려면 `make charts`를 실행합니다. CSV에는 비교 유형
+(`input_shape` 또는 `random_size`), 입력 모양,
 알고리즘명, 배열 크기, 반복 횟수, 시간, 비교·이동 횟수, 보조 공간, 재귀 깊이,
 정렬 여부, 안정성 여부가 들어갑니다.
 
@@ -84,12 +86,6 @@ make test
 - 결과
 
 ```console
-ok    섞인 배열
-ok    이미 정렬된 배열
-ok    역순 배열
-ok    원소 하나
-ok    빈 배열
-
 21 checks, 0 failures
 ```
 
@@ -102,7 +98,8 @@ ok    빈 배열
 | `make test` | C 유닛 테스트 |
 | `make run-c` | C 예제 실행 |
 | `make test-c` | C 유닛 테스트 |
-| `make report` | 정렬 성능 비교 후 `report.md` 생성 |
+| `make report` | 정렬 성능 비교 후 `report/report.md` 생성 |
+| `make charts` | `report/results.csv`에서 SVG 그래프 재생성 |
 | `make debug` | 디버그 심볼을 넣어 빌드 |
 | `make clean` | 빌드 산출물 정리 |
 
@@ -162,7 +159,7 @@ algorithm-env/
 ├── compose.yml                      # 실습 컨테이너 (서비스 이름: lab)
 ├── Dockerfile                       # gcc · gdb · make · git
 ├── .vscode/                         # 빌드·디버그 설정 (F5, Cmd+Shift+B)
-├── Makefile                         # run · test · report · debug · clean
+├── Makefile                         # run · test · report · charts · debug · clean
 ├── src/
 │   ├── sort.h                      # C 공통 인터페이스
 │   ├── insertionSort.c              # 삽입 정렬
@@ -170,8 +167,12 @@ algorithm-env/
 │   ├── treeSort.c                   # tree sort
 │   └── main.c                       # C 실행 예제
 ├── tools/
-│   └── benchmark.c                  # 성능 측정 및 보고서 생성
-├── report.md                        # 정렬 성능 비교 결과
+│   ├── benchmark.c                  # 성능 측정 및 보고서 생성
+│   └── svgchart.py                  # CSV에서 SVG 그래프 생성
+├── report/
+│   ├── report.md                    # 정렬 성능 비교 결과
+│   ├── results.csv                  # 벤치마크 측정 결과
+│   └── tools/charts/*.svg           # 비교 그래프
 └── tests/
     └── test_sort.c                  # C 유닛 테스트 (표준 C만 사용)
 ```
@@ -186,7 +187,7 @@ algorithm-env/
 
 ## 자기 코드로 바꾸기
 
-`src`의 정렬 구현은 `report.md`의 성능 비교에 사용합니다. 자기 코드로 바꿀 때는
+`src`의 정렬 구현은 `report/report.md`의 성능 비교에 사용합니다. 자기 코드로 바꿀 때는
 `tests`도 함께 수정하세요. 뼈대(`Makefile`, `src`, `tests`, 컨테이너 설정)는
 그대로 사용할 수 있습니다.
 
