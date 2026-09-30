@@ -6,6 +6,13 @@
 - 실행: `make run` (비교 표) · `make test` (유닛 테스트 42개)
 - 환경: 컨테이너 안 `gcc -std=c17 -Wall -Wextra -O2`
 
+## Github Repository
+https://github.com/ramzz527/hw1-2026-SeminAhn.git
+
+## 사용 AI
+github 내장 capliot, chatGPT
+
+
 ## 차례
 
 1. [코드 보고서](#1-코드-보고서) - 무엇을 어떻게 만들었나
@@ -265,3 +272,5 @@ flowchart LR
  2) **알고리즘 자체의 한계** : Quick sort와 Tree sort는 입력 형태에 따라 최악 O(n²)의 성능을 보일 수 있다. 따라서 실제 활용에서는 피벗 선택 개선이나 self-balancing BST 등의 보완이 필요하다.
 
  3) **실험 결과 일반화의 한계** : 성능 측정은 특정 실행 환경과 입력 조건에서 수행되었으므로 결과를 일반화하기 어렵다. 특히 실행 시간과 작은 배열의 교차점은 환경과 입력 분포에 따라 달라질 수 있다.
+
+
