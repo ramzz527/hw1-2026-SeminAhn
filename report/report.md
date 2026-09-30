@@ -162,7 +162,7 @@ flowchart LR
 같은 값 `1, 2, 3, 4`를 오름차순으로 삽입하면 두 트리의 모양은 다음처럼 달라진다. 일반 BST는 오른쪽으로 길어지지만 AVL 트리는 회전으로 높이를 낮게 유지한다.
 
 ```mermaid
-%%{init: {"themeVariables": {"fontSize": "12px"}, "flowchart": {"nodeSpacing": 20, "rankSpacing": 25}}}%%
+%%{init: {"themeVariables": {"fontSize": "10px"}, "flowchart": {"nodeSpacing": 12, "rankSpacing": 15, "diagramPadding": 4}}}%%
 flowchart LR
     subgraph ordinary["일반 BST · 오름차순 삽입"]
         direction TB
