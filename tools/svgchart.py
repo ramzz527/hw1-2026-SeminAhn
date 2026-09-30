@@ -81,7 +81,7 @@ def log_ticks(minimum, maximum):
 
 
 def render_chart(title, y_label, categories, values, metric, output_path, logarithmic):
-    width, height = 900, 460
+    width, height = 800, 410
     left, right, top, bottom = 95, 32, 86, 120
     plot_width, plot_height = width - left - right, height - top - bottom
     maximum = max(values.values(), default=0.0)
@@ -181,7 +181,7 @@ def render_chart(title, y_label, categories, values, metric, output_path, logari
 
 
 def render_line_chart(title, y_label, categories, series, output_path):
-    width, height = 1100, 560
+    width, height = 800, 410
     left, right, top, bottom = 95, 32, 86, 120
     plot_width, plot_height = width - left - right, height - top - bottom
     maximum = max(max(values) for values in series.values())

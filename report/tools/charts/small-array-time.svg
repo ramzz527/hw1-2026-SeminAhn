@@ -1,60 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560" role="img" aria-label="작은 배열 크기별 실행 시간">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="410" viewBox="0 0 800 410" role="img" aria-label="작은 배열 크기별 실행 시간">
 <style>text{font-family:"DejaVu Sans",sans-serif;fill:#202b33}.grid{stroke:#dce3e6;stroke-width:1}.axis{stroke:#53636c;stroke-width:1.2}.tick{font-size:12px}.category{font-size:14px}.legend{font-size:13px}.title{font-size:21px;font-weight:700}.ylabel{font-size:13px}</style>
-<text class="title" x="550.0" y="36" text-anchor="middle">작은 배열 크기별 실행 시간</text>
-<line class="grid" x1="95" y1="440.0" x2="1068" y2="440.0"/>
-<text class="tick" x="83" y="444.0" text-anchor="end">0.0000</text>
-<line class="grid" x1="95" y1="369.2" x2="1068" y2="369.2"/>
-<text class="tick" x="83" y="373.2" text-anchor="end">1.0000</text>
-<line class="grid" x1="95" y1="298.4" x2="1068" y2="298.4"/>
-<text class="tick" x="83" y="302.4" text-anchor="end">2.0000</text>
-<line class="grid" x1="95" y1="227.6" x2="1068" y2="227.6"/>
-<text class="tick" x="83" y="231.6" text-anchor="end">3.0000</text>
-<line class="grid" x1="95" y1="156.8" x2="1068" y2="156.8"/>
-<text class="tick" x="83" y="160.8" text-anchor="end">4.0000</text>
-<line class="grid" x1="95" y1="86.0" x2="1068" y2="86.0"/>
+<text class="title" x="400.0" y="36" text-anchor="middle">작은 배열 크기별 실행 시간</text>
+<line class="grid" x1="95" y1="290.0" x2="768" y2="290.0"/>
+<text class="tick" x="83" y="294.0" text-anchor="end">0.0000</text>
+<line class="grid" x1="95" y1="249.2" x2="768" y2="249.2"/>
+<text class="tick" x="83" y="253.2" text-anchor="end">1.0000</text>
+<line class="grid" x1="95" y1="208.4" x2="768" y2="208.4"/>
+<text class="tick" x="83" y="212.4" text-anchor="end">2.0000</text>
+<line class="grid" x1="95" y1="167.6" x2="768" y2="167.6"/>
+<text class="tick" x="83" y="171.6" text-anchor="end">3.0000</text>
+<line class="grid" x1="95" y1="126.8" x2="768" y2="126.8"/>
+<text class="tick" x="83" y="130.8" text-anchor="end">4.0000</text>
+<line class="grid" x1="95" y1="86.0" x2="768" y2="86.0"/>
 <text class="tick" x="83" y="90.0" text-anchor="end">5.0000</text>
-<line class="axis" x1="95" y1="86" x2="95" y2="440"/>
-<line class="axis" x1="95" y1="440" x2="1068" y2="440"/>
-<text class="ylabel" x="22" y="263.0" transform="rotate(-90 22 263.0)" text-anchor="middle">시간 (µs)</text>
-<polyline points="155.8,439.8 277.4,439.6 399.1,439.4 520.7,438.6 642.3,436.1 763.9,421.7 885.6,400.2 1007.2,267.4" fill="none" stroke="#0072B2" stroke-width="3"/>
-<circle cx="155.8" cy="439.8" r="4" fill="#0072B2"/>
-<circle cx="277.4" cy="439.6" r="4" fill="#0072B2"/>
-<circle cx="399.1" cy="439.4" r="4" fill="#0072B2"/>
-<circle cx="520.7" cy="438.6" r="4" fill="#0072B2"/>
-<circle cx="642.3" cy="436.1" r="4" fill="#0072B2"/>
-<circle cx="763.9" cy="421.7" r="4" fill="#0072B2"/>
-<circle cx="885.6" cy="400.2" r="4" fill="#0072B2"/>
-<circle cx="1007.2" cy="267.4" r="4" fill="#0072B2"/>
-<polyline points="155.8,439.8 277.4,439.4 399.1,438.5 520.7,437.4 642.3,434.2 763.9,407.4 885.6,403.5 1007.2,320.5" fill="none" stroke="#D55E00" stroke-width="3"/>
-<circle cx="155.8" cy="439.8" r="4" fill="#D55E00"/>
-<circle cx="277.4" cy="439.4" r="4" fill="#D55E00"/>
-<circle cx="399.1" cy="438.5" r="4" fill="#D55E00"/>
-<circle cx="520.7" cy="437.4" r="4" fill="#D55E00"/>
-<circle cx="642.3" cy="434.2" r="4" fill="#D55E00"/>
-<circle cx="763.9" cy="407.4" r="4" fill="#D55E00"/>
-<circle cx="885.6" cy="403.5" r="4" fill="#D55E00"/>
-<circle cx="1007.2" cy="320.5" r="4" fill="#D55E00"/>
-<polyline points="155.8,439.8 277.4,437.6 399.1,435.8 520.7,430.2 642.3,418.4 763.9,354.3 885.6,333.8 1007.2,209.9" fill="none" stroke="#009E73" stroke-width="3"/>
-<circle cx="155.8" cy="439.8" r="4" fill="#009E73"/>
-<circle cx="277.4" cy="437.6" r="4" fill="#009E73"/>
-<circle cx="399.1" cy="435.8" r="4" fill="#009E73"/>
-<circle cx="520.7" cy="430.2" r="4" fill="#009E73"/>
-<circle cx="642.3" cy="418.4" r="4" fill="#009E73"/>
-<circle cx="763.9" cy="354.3" r="4" fill="#009E73"/>
-<circle cx="885.6" cy="333.8" r="4" fill="#009E73"/>
-<circle cx="1007.2" cy="209.9" r="4" fill="#009E73"/>
-<text class="category" x="155.8" y="465" text-anchor="middle">1</text>
-<text class="category" x="277.4" y="465" text-anchor="middle">2</text>
-<text class="category" x="399.1" y="465" text-anchor="middle">4</text>
-<text class="category" x="520.7" y="465" text-anchor="middle">8</text>
-<text class="category" x="642.3" y="465" text-anchor="middle">16</text>
-<text class="category" x="763.9" y="465" text-anchor="middle">32</text>
-<text class="category" x="885.6" y="465" text-anchor="middle">64</text>
-<text class="category" x="1007.2" y="465" text-anchor="middle">128</text>
-<line x1="355.0" y1="524" x2="371.0" y2="524" stroke="#0072B2" stroke-width="3"/>
-<text class="legend" x="376.0" y="530">Insertion</text>
-<line x1="485.0" y1="524" x2="501.0" y2="524" stroke="#D55E00" stroke-width="3"/>
-<text class="legend" x="506.0" y="530">Quick</text>
-<line x1="615.0" y1="524" x2="631.0" y2="524" stroke="#009E73" stroke-width="3"/>
-<text class="legend" x="636.0" y="530">Tree</text>
+<line class="axis" x1="95" y1="86" x2="95" y2="290"/>
+<line class="axis" x1="95" y1="290" x2="768" y2="290"/>
+<text class="ylabel" x="22" y="188.0" transform="rotate(-90 22 188.0)" text-anchor="middle">시간 (µs)</text>
+<polyline points="137.1,289.9 221.2,289.8 305.3,289.7 389.4,289.2 473.6,287.8 557.7,279.5 641.8,267.0 725.9,190.6" fill="none" stroke="#0072B2" stroke-width="3"/>
+<circle cx="137.1" cy="289.9" r="4" fill="#0072B2"/>
+<circle cx="221.2" cy="289.8" r="4" fill="#0072B2"/>
+<circle cx="305.3" cy="289.7" r="4" fill="#0072B2"/>
+<circle cx="389.4" cy="289.2" r="4" fill="#0072B2"/>
+<circle cx="473.6" cy="287.8" r="4" fill="#0072B2"/>
+<circle cx="557.7" cy="279.5" r="4" fill="#0072B2"/>
+<circle cx="641.8" cy="267.0" r="4" fill="#0072B2"/>
+<circle cx="725.9" cy="190.6" r="4" fill="#0072B2"/>
+<polyline points="137.1,289.9 221.2,289.6 305.3,289.2 389.4,288.5 473.6,286.7 557.7,271.2 641.8,269.0 725.9,221.2" fill="none" stroke="#D55E00" stroke-width="3"/>
+<circle cx="137.1" cy="289.9" r="4" fill="#D55E00"/>
+<circle cx="221.2" cy="289.6" r="4" fill="#D55E00"/>
+<circle cx="305.3" cy="289.2" r="4" fill="#D55E00"/>
+<circle cx="389.4" cy="288.5" r="4" fill="#D55E00"/>
+<circle cx="473.6" cy="286.7" r="4" fill="#D55E00"/>
+<circle cx="557.7" cy="271.2" r="4" fill="#D55E00"/>
+<circle cx="641.8" cy="269.0" r="4" fill="#D55E00"/>
+<circle cx="725.9" cy="221.2" r="4" fill="#D55E00"/>
+<polyline points="137.1,289.9 221.2,288.6 305.3,287.6 389.4,284.3 473.6,277.6 557.7,240.6 641.8,228.8 725.9,157.4" fill="none" stroke="#009E73" stroke-width="3"/>
+<circle cx="137.1" cy="289.9" r="4" fill="#009E73"/>
+<circle cx="221.2" cy="288.6" r="4" fill="#009E73"/>
+<circle cx="305.3" cy="287.6" r="4" fill="#009E73"/>
+<circle cx="389.4" cy="284.3" r="4" fill="#009E73"/>
+<circle cx="473.6" cy="277.6" r="4" fill="#009E73"/>
+<circle cx="557.7" cy="240.6" r="4" fill="#009E73"/>
+<circle cx="641.8" cy="228.8" r="4" fill="#009E73"/>
+<circle cx="725.9" cy="157.4" r="4" fill="#009E73"/>
+<text class="category" x="137.1" y="315" text-anchor="middle">1</text>
+<text class="category" x="221.2" y="315" text-anchor="middle">2</text>
+<text class="category" x="305.3" y="315" text-anchor="middle">4</text>
+<text class="category" x="389.4" y="315" text-anchor="middle">8</text>
+<text class="category" x="473.6" y="315" text-anchor="middle">16</text>
+<text class="category" x="557.7" y="315" text-anchor="middle">32</text>
+<text class="category" x="641.8" y="315" text-anchor="middle">64</text>
+<text class="category" x="725.9" y="315" text-anchor="middle">128</text>
+<line x1="205.0" y1="374" x2="221.0" y2="374" stroke="#0072B2" stroke-width="3"/>
+<text class="legend" x="226.0" y="380">Insertion</text>
+<line x1="335.0" y1="374" x2="351.0" y2="374" stroke="#D55E00" stroke-width="3"/>
+<text class="legend" x="356.0" y="380">Quick</text>
+<line x1="465.0" y1="374" x2="481.0" y2="374" stroke="#009E73" stroke-width="3"/>
+<text class="legend" x="486.0" y="380">Tree</text>
 </svg>
