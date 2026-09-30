@@ -290,8 +290,8 @@ def generate(rows, output_dir):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("csv", nargs="?", type=Path, default=Path("results.csv"))
-    parser.add_argument("--output-dir", type=Path, default=Path("tools/charts"))
+    parser.add_argument("csv", nargs="?", type=Path, default=Path("report/results.csv"))
+    parser.add_argument("--output-dir", type=Path, default=Path("report/tools/charts"))
     args = parser.parse_args()
     generate(read_results(args.csv), args.output_dir)
     print(f"SVG charts written to {args.output_dir}")

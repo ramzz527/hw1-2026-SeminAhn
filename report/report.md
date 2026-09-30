@@ -42,6 +42,17 @@
 flowchart TB
     make["Makefile"]
     report["report.md"]
+    results["results.csv"]
+    readme["README.md"]
+    changelog["CHANGELOG.md"]
+    gitignore[".gitignore"]
+    instructions["AGENTS.md · CLAUDE.md"]
+    subgraph environment["환경 설정"]
+        compose["compose.yml"]
+        dockerfile["Dockerfile"]
+        devcontainer[".devcontainer/devcontainer.json"]
+        vscode[".vscode/*.json"]
+    end
     subgraph src["src/"]
         header["sort.h\nC 공통 인터페이스"]
         insertion["insertionSort.c"]
@@ -51,6 +62,8 @@ flowchart TB
     end
     subgraph tools["tools/"]
         benchmark["benchmark.c"]
+        svgchart["svgchart.py"]
+        charts["charts/*.svg"]
     end
     subgraph tests["tests/"]
         test["test_sort.c"]
@@ -68,21 +81,33 @@ flowchart TB
     benchmark --> quick
     benchmark --> tree
     benchmark --> report
+    main --> results
+    results --> svgchart
+    svgchart --> charts
     make --> main
     make --> test
     make --> benchmark
+    make --> svgchart
 ```
 
 | 파일 | 기능 |
 | --- | --- |
 | `Makefile` | C 프로그램 빌드·실행·테스트·보고서 생성 |
+| `compose.yml`, `Dockerfile` | 실습 컨테이너 구성 |
+| `.devcontainer/devcontainer.json`, `.vscode/*.json` | 개발 컨테이너와 VS Code 빌드·디버그 설정 |
+| `README.md`, `CHANGELOG.md` | 사용 방법과 변경 내역 |
+| `AGENTS.md`, `CLAUDE.md` | 저장소 작업 지침 |
+| `.gitignore` | 빌드 산출물 제외 규칙 |
 | `report.md` | 정렬 알고리즘 설명과 C 실험 결과 |
+| `results.csv` | 실행별 벤치마크 측정 결과 |
 | `src/sort.h` | C 정렬 함수와 통계 구조체의 공통 인터페이스 |
 | `src/insertionSort.c` | C 삽입 정렬 구현 |
 | `src/quickSort.c` | C 퀵 정렬 구현 |
 | `src/treeSort.c` | 이진 탐색 트리를 만들고 중위 순회로 정렬하는 tree sort |
 | `src/main.c` | 정렬 실행 예제와 통계 출력 |
 | `tools/benchmark.c` | C 정렬 성능 측정 및 `report.md` 생성 |
+| `tools/svgchart.py` | CSV 측정 결과를 SVG 차트로 변환 |
+| `tools/charts/*.svg` | 생성된 성능 비교 차트 |
 | `tests/test_sort.c` | 표준 C로 정렬 결과와 통계 검증 |
 
 ### 1.4 검증 방법
@@ -98,6 +123,7 @@ $ make test
 5. **시간 측정**: 준비 실행 후 복사를 제외하고 7회 재며, 중앙값을 사용한다. 연산·공간 통계는 별도로 잰다.
 6. **안정성**: 레코드 순서를 직접 시험하지 않고, 같은 값의 순서를 보존하는지 구현의 동률 처리로 판별한다.
 
+
 **변이 테스트**
 : 실제 코드는 그대로 두고 `/tmp` 복사본에 결함을 넣어 테스트가 검출하는지 확인했다.
 
@@ -106,11 +132,15 @@ $ make test
 | Tree sort에서 중복 원소 개수 증가 제거 | 중복 입력 검사 실패 (21개 중 1개, 종료 코드 1) |
 | Tree sort에서 오른쪽 하위 트리 순회 생략 | 통계·섞인 배열·중복 입력 검사 실패 (21개 중 3개, 종료 코드 1) |
 
+또한 **ASan·UBSan** 활성화 상태로도 실행하여 오류가 없음을 확인했다.  `make -B test CFLAGS='-std=c17 -Wall -Wextra -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer'`로 빌드·실행해 21개 검사를 통과했고, 컴파일 경고와 sanitizer 진단은 없었다.
+
 ## 2. 알고리즘 상세
 
 ### 2.1 삽입 정렬 (Insertion sort)
 
 왼쪽의 정렬된 구간을 유지하면서 다음 원소를 꺼내, 그보다 큰 원소를 오른쪽으로 옮긴 뒤 빈자리에 삽입한다. 거의 정렬됐거나 원소 수가 적으면 빠르지만, 역순에 가까운 입력에서는 이동이 많아진다. 최선은 O(n), 평균·최악은 O(n²)이며 제자리에서 안정적으로 정렬한다.
+
+퀵 정렬처럼 구간을 분할하거나 트리 정렬처럼 별도 노드를 만들지 않고 배열 안에서 원소를 이동하므로 추가 공간은 O(1)이고 안정적이다. 다만 큰 무작위 입력에서는 평균 O(n²)이라 평균 O(n log n)인 퀵 정렬이나 균형에 가까운 트리 정렬보다 불리하다.
 
 핵심은 현재 값을 보관하고, 그보다 큰 앞쪽 원소만 오른쪽으로 밀어 빈자리에 삽입하는 것이다.
 
@@ -124,7 +154,7 @@ while (j >= 0 && a[j] > value) {
 a[j + 1] = value;
 ```
 
-`>` 조건은 같은 값은 지나치지 않으므로 입력 순서를 유지한다.
+`>` 조건은 같은 값은 지나치지 않으므로 입력 순서를 유지한다. 이로 인해 안정성을 유지할 수 있다.
 
 ```mermaid
 flowchart LR
@@ -137,6 +167,8 @@ flowchart LR
 ### 2.2 퀵 정렬 (Quick sort)
 
 피벗을 기준으로 작은 값·같은 값·큰 값의 세 구간으로 분할한 뒤, 작은 값과 큰 값 구간을 재귀적으로 정렬한다. 평균은 O(n log n)이지만 분할이 한쪽으로 치우치면 최악 O(n²)이다. 가운데 원소를 피벗으로 사용하는 이 구현은 제자리 분할을 하지만 안정성은 보장하지 않는다.
+
+삽입 정렬보다 큰 무작위 입력에서 평균적으로 빠르게 동작하지만, 같은 값의 상대 순서는 보존하지 않는다. 트리 정렬과 달리 O(n)개의 트리 노드를 만들지 않고 배열을 제자리에서 분할하지만, 피벗 분할이 치우치면 최악 O(n²)이 될 수 있다.
 
 `less`, `scan`, `greater` 경계로 작은 값·미확인 값·큰 값을 나누며 한 번의 순회로 피벗 기준 세 구간을 만든다.
 
@@ -173,6 +205,8 @@ flowchart LR
 트리 정렬의 내용은 AI(chatGPT)를 사용해서 학습하였다. 아래 내용은 트리 정렬에 대해서 학습한 내용이다.
 
 입력 원소를 이진 탐색 트리에 삽입한 뒤, 중위 순회(left → node → right) 결과를 배열에 다시 써 오름차순으로 만든다. 이 구현은 반복형 삽입과 반복형 순회를 사용해 트리가 한쪽으로 기울어도 호출 스택이 깊어지지 않게 한다. 같은 정수는 새 노드를 만들지 않고 해당 노드의 `occurrences`를 증가시킨다.
+
+삽입·퀵 정렬처럼 배열을 직접 이동하거나 분할하지 않고 별도 트리 노드와 순회 스택을 사용하므로 추가 공간이 O(n)이다. 삽입 정렬과 달리 안정적이지 않으며, 퀵 정렬의 피벗 분할과 달리 입력 순서에 따라 트리가 한쪽으로 기울면 최악 O(n²)이 될 수 있다.
 
 #### 선수 개념: 이진 탐색 트리란
 이진 탐색 트리는 각 노드가 값과 왼쪽·오른쪽 자식을 갖는 구조다. 왼쪽 하위 트리에는 노드보다 작은 값, 오른쪽 하위 트리에는 큰 값을 둔다. 같은 값은 새 노드 대신 기존 노드의 `occurrences`에 센다.

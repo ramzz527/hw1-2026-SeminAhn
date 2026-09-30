@@ -20,7 +20,7 @@ DEBUGFLAGS ?= -std=c17 -Wall -Wextra -g -O0
 all: test
 
 run: run-c
-	@python3 tools/svgchart.py results.csv
+	@python3 tools/svgchart.py report/results.csv
 
 run-c: src/main.out
 	@./src/main.out

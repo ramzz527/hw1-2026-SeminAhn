@@ -811,18 +811,18 @@ int main(void) {
         return 1;
     }
 
-    FILE *report = fopen("report.md", "w");
+    FILE *report = fopen("report/report.md", "w");
     if (report == NULL) {
-        perror("report.md");
+        perror("report/report.md");
         return 1;
     }
     writeReport(report);
     if (fclose(report) != 0) {
-        perror("report.md");
+        perror("report/report.md");
         return 1;
     }
 
-    printf("Wrote report.md with C-only measurements (n=%d, median of %d runs)\n",
+    printf("Wrote report/report.md with C-only measurements (n=%d, median of %d runs)\n",
            ARRAY_SIZE, REPEATS);
     return 0;
 }

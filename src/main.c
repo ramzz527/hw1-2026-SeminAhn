@@ -147,7 +147,7 @@ static int runExperiment(FILE *csv, const Experiment *experiment) {
                     stats.moves, stats.auxiliary_bytes,
                     stats.max_recursion_depth, sorted ? "yes" : "no",
                     entry->stable ? "yes" : "no") < 0) {
-            perror("results.csv");
+            perror("report/results.csv");
             return 0;
         }
     }
@@ -174,9 +174,9 @@ int main(void) {
          8000, makeRandomInput},
     };
 
-    FILE *csv = fopen("results.csv", "w");
+    FILE *csv = fopen("report/results.csv", "w");
     if (csv == NULL) {
-        perror("results.csv");
+        perror("report/results.csv");
         return 1;
     }
     fputs("experiment,input_shape,array_size,repeats,algorithm,time_ms,"
@@ -191,10 +191,10 @@ int main(void) {
         }
     }
     if (fclose(csv) != 0) {
-        perror("results.csv");
+        perror("report/results.csv");
         return 1;
     }
     printf("\n비교: 비교 횟수, 이동 횟수, 보조 공간(B), 최대 재귀 깊이, 정렬 여부, 안정성\n");
-    printf("보조 공간은 입력과 호출 스택을 제외하며, results.csv는 매 실행 시 덮어씁니다.\n");
+    printf("보조 공간은 입력과 호출 스택을 제외하며, report/results.csv는 매 실행 시 덮어씁니다.\n");
     return 0;
 }
